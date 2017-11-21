@@ -11,12 +11,13 @@
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
-          <v-list-tile-content> 
+          <v-list-tile-content>
             {{ item.title }}
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
-    </v-navigation-drawer>   
+    </v-navigation-drawer>
+
     <v-toolbar>
       <v-toolbar-side-icon
         @click.stop="sideNav = !sideNav"
@@ -27,13 +28,14 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn 
+        <v-btn
           flat
           v-for="item in menuItems"
           :key="item.title"
           class="hidden-xs-only"
           router
           :to="item.link"
+          exact
         >
           <v-icon left>{{ item.icon }}</v-icon>
           {{ item.title }}
