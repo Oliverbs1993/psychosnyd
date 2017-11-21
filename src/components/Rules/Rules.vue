@@ -1,6 +1,6 @@
 <template>
 	<v-container style="marginTop: 0;">
-		<v-layout row wrap>
+		<v-layout row wrap v-for="rule in rules" :key="rule.id" class="mb-4">
 			<v-flex xs12>
 				<v-card class="info">
 					<v-container fluid>
@@ -13,12 +13,13 @@
 							<v-flex xs12>
 								<v-card-title>
 									<div>
-										<h1>Title</h1>
-										<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque aliquid, exercitationem dicta, tenetur velit assumenda eum quidem vel dolores molestiae, nemo. Dignissimos deserunt autem earum distinctio quis quasi, sequi repellendus!</div>
+										<h1>{{ rule.title }}</h1>
+                    <div >{{ rule.date }}</div>
+                    <div>{{ rule.description }}</div>
 									</div>
 								</v-card-title>
 								<v-card-actions>
-									<v-btn flat to="/rules/1">
+									<v-btn :to="'/rules/' + rule.id">
 										View full rule
 										<v-icon right>remove_red_eye</v-icon>
 									</v-btn>
@@ -31,3 +32,13 @@
 		</v-layout>
 	</v-container>
 </template>
+
+<script>
+  export default {
+    computed: {
+      rules () {
+        return this.$store.getters.loadedRules
+      }
+    }
+  }
+</script>

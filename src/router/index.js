@@ -25,17 +25,13 @@ export default new Router({
     },
     {
       path: '/rules/new',
-      name: 'Rules',
-      component: Rules
-    },
-    {
-      path: '/rules/new',
       name: 'CreateRules',
       component: CreateRules
     },
     {
       path: '/rules/:id',
       name: 'Rule',
+      props: true,
       component: Rule
     },
     {

@@ -14,7 +14,7 @@
 		          <v-list-tile-action>
 		            <v-icon>{{ step.icon }}</v-icon>
 		          </v-list-tile-action>
-		          <v-list-tile-content> 
+		          <v-list-tile-content>
 		            {{ step.title }}
 		          </v-list-tile-content>
 		        </v-list-tile>
@@ -48,6 +48,11 @@
 
 <script>
   export default {
+    computed: {
+      rules () {
+        return this.$store.getters.latestRules
+      }
+    },
     data () {
       return {
         steps: [
@@ -55,12 +60,6 @@
           { icon : 'thumb_up', title: '2. Drink'},
           { icon : 'playlist_add_check', title: '3. Make rules'},
           { icon : 'attach_money', title: '4. Profit'},
-        ],
-        rules: [
-        	{ title: 'Rule1', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'},
-        	{ title: 'Rule2', description: 'Expedita tempore provident rerum reiciendis pariatur'},
-        	{ title: 'Rule3', description: 'natus consequatur laudantium dolore unde'},
-        	{ title: 'Rule4', description: 'vitae harum facilis id sapiente!'},
         ]
       }
     }
