@@ -5,7 +5,7 @@
 				<v-card class="info">
 					<v-container fluid>
 						<v-layout row>
-							<v-flex xs1 >
+							<v-flex xs1>
 								<v-card-media>
 									<v-icon left dark>import_contacts</v-icon>
 								</v-card-media>
