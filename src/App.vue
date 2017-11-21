@@ -7,6 +7,7 @@
           :key="item.title"
           router
           :to="item.link"
+          exact
           >
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
