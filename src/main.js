@@ -4,17 +4,29 @@ import Vuetify from 'vuetify'
 import '../node_modules/vuetify/src/stylus/main.styl'
 
 import App from './App'
+import firebase from 'firebase'
 import router from './router'
 import { store } from './store'
+import DateFilter from './filters/date'
 
 Vue.use(Vuetify)
-
 Vue.config.productionTip = false
+
+Vue.filter('date', DateFilter)
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
+  created () {
+    firebase.initializeApp({
+      apiKey: 'AIzaSyA3MACIXJRGn49sLy8B5z0jem7XbSnDPqU',
+      authDomain: 'psychosnyd.firebaseapp.com',
+      databaseURL: 'https://psychosnyd.firebaseio.com',
+      projectId: 'psychosnyd',
+      storageBucket: 'psychosnyd.appspot.com',
+    })
+  }
 })

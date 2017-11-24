@@ -6,7 +6,7 @@
 					<v-card-title>
 						<h1>{{ rule.title }}</h1>
             <v-spacer></v-spacer>
-            <div >{{ rule.date }}</div>
+            <div >{{ rule.date | date  }}</div>
 					</v-card-title>
 					<v-divider></v-divider>
 					<v-card-text>

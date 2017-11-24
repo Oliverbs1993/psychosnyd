@@ -14,7 +14,7 @@
 								<v-card-title>
 									<div>
 										<h1>{{ rule.title }}</h1>
-                    <div >{{ rule.date }}</div>
+                    <div >{{ rule.date | date }}</div>
                     <div>{{ rule.description }}</div>
 									</div>
 								</v-card-title>

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import firebase from 'firebase'
 
 Vue.use(Vuex)
 
@@ -8,31 +9,31 @@ export const store = new Vuex.Store({
     loadedRules: [
       {
         id: '1',
-        date: '01-09-2017',
+        date: new Date(),
         title: 'Rule1',
         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
       },
       {
         id: '2',
-        date: '10-09-2017',
+        date: new Date(),
         title: 'Rule2',
         description: 'Expedita tempore provident rerum reiciendis pariatur'
       },
       {
         id: '3',
-        date: '11-09-2017',
+        date: new Date(),
         title: 'Rule3',
         description: 'natus consequatur laudantium dolore unde'
       },
       {
         id: '4',
-        date: '12-09-2017',
+        date: new Date(),
         title: 'Rule4',
         description: 'vitae harum facilis id sapiente!'
       },
       {
         id: '5',
-        date: '12-09-2017',
+        date: new Date(),
         title: 'Rule5',
         description: 'vdasdasd ilis id sapiente!'
       },
@@ -42,8 +43,44 @@ export const store = new Vuex.Store({
       registeredRules: ['1']
     }
   },
-	mutations: {},
-	actions: {},
+	mutations: {
+    createRule (state, payload) {
+      state.loadedRules.push(payload)
+    },
+    setUser (state, payload) {
+      state.user = payload
+    }
+  },
+  //Make this as mutations see video at 15min mark
+	actions: {
+    createRule ({commit}, payload) {
+      const rule = {
+        title: payload.title,
+        description: payload.description,
+        date: payload.date,
+        id: 'adasdsds'
+      }
+      //Reach for firebase
+      commit('createRule', rule)
+    },
+    signUserUp ({commit}, payload) {
+      firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
+        .then(
+          user => {
+            const newUser = {
+              id: user.uid,
+              registeredRules: []
+            }
+            commit('setUser', newUser)
+          }
+        )
+        .catch(
+          error => {
+            console.log(error)
+          }
+        )
+    }
+  },
 	getters: {
     loadedRules (state) {
       return state.loadedRules.sort((ruleA, ruleB) => {

@@ -7,7 +7,7 @@
     </v-layout>
     <v-layout row>
       <v-flex xs12>
-        <form>
+        <form @submit.prevent="onCreateRule">
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
               <v-text-field
@@ -33,7 +33,10 @@
           </v-layout>
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
-              <v-btn class="primary">Create rule!</v-btn>
+              <v-btn
+                class="primary"
+                :disabled="!formIsValid"
+                type="submit">Create rule!</v-btn>
             </v-flex>
           </v-layout>
         </form>
@@ -48,6 +51,25 @@
       return {
         title: '',
         description: ''
+      }
+    },
+    computed: {
+      formIsValid () {
+        return this.title !== '' && this.description !== ''
+      }
+    },
+    methods: {
+      onCreateRule () {
+        if (!this.formIsValid) {
+          return
+        }
+        const ruleData = {
+          title: this.title,
+          description: this.description,
+          date: new Date()
+        }
+        this.$store.dispatch('createRule', ruleData)
+        this.$router.push('/rules')
       }
     }
   }
