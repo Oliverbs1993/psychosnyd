@@ -54,14 +54,28 @@
     data () {
       return {
         sideNav: false,
-        menuItems: [
+      }
+    },
+    computed: {
+      menuItems () {
+        let menuItems = [
           { icon : 'list', title: 'view rules', link: '/rules'},
-          { icon : 'create', title: 'create rules', link: '/rules/new'},
-          { icon : 'lock_open', title: 'log in', link: '/signin'},
           { icon : 'perm_identity', title: 'sign up', link: '/signup'},
-          { icon : 'account_box', title: 'user', link: '/profile'},
+          { icon : 'lock_open', title: 'log in', link: '/signin'},
           { icon : 'help_outline', title: 'Faq', link: '/faq'}
         ]
+        if (this.userIsAuthenticated) {
+          menuItems = [
+            { icon : 'list', title: 'view rules', link: '/rules'},
+            { icon : 'create', title: 'create rules', link: '/rules/new'},
+            { icon : 'account_box', title: 'user', link: '/profile'},
+            { icon : 'help_outline', title: 'Faq', link: '/faq'}
+          ]
+        }
+        return menuItems
+      },
+      userIsAuthenticated () {
+        return this.$store.getters.user !== null && this.$store.getters.user !== undefined
       }
     }
   }

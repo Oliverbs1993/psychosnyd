@@ -38,10 +38,7 @@ export const store = new Vuex.Store({
         description: 'vdasdasd ilis id sapiente!'
       },
     ],
-    user: {
-      id: 'eawewe',
-      registeredRules: ['1']
-    }
+    user: null
   },
 	mutations: {
     createRule (state, payload) {
@@ -79,7 +76,27 @@ export const store = new Vuex.Store({
             console.log(error)
           }
         )
-    }
+    },
+    signUserIn ({commit}, payload) {
+      firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
+        .then(
+          user => {
+            const newUser = {
+              id: user.uid,
+              registeredRules: []
+            }
+            commit('setUser', newUser)
+          }
+        )
+        .catch(
+          error => {
+            console.log(error)
+          }
+        )
+    },
+    setUser ({commit}, payload) {
+      commit('setUser', payload)
+    },
   },
 	getters: {
     loadedRules (state) {
@@ -96,6 +113,9 @@ export const store = new Vuex.Store({
           return rule.id == ruleId
         })
       }
+    },
+    user (state) {
+      return state.user
     }
   }
 })

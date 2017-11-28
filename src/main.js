@@ -27,6 +27,18 @@ new Vue({
       databaseURL: 'https://psychosnyd.firebaseio.com',
       projectId: 'psychosnyd',
       storageBucket: 'psychosnyd.appspot.com',
+    }),
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        // User is signed in.
+        const userData = {
+          id: user.uid,
+          registeredRules: []
+        }
+        store.dispatch('setUser', userData)
+      } else {
+        console.log('No user is signed in.')
+      }
     })
   }
 })
